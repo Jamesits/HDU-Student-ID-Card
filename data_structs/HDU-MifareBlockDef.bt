@@ -1,0 +1,94 @@
+//------------------------------------------------
+//--- 010 Editor v7.0.2 Binary Template
+//
+//      File: HDU-MifareBlockDef.bt
+//   Authors: James Swineson
+//   Version: 1.0
+//   Purpose: Reusuable blocks and sectors definition for HDU student ID cards
+//  Category: Electronics
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//   1.0   Initial release.
+//------------------------------------------------
+
+
+struct Mifare_ACL {
+    char    Key_A[6] <format=hex, bgcolor=cDkGray, fgcolor=cLtRed>;
+    char    Access_Bits[3] <bgcolor=cDkGray, fgcolor=cWhite>;
+    char    GPB[1] <bgcolor=cDkGray, fgcolor=cLtBlue>;
+    char    Key_B[6] <format=hex, bgcolor=cDkGray, fgcolor=cYellow>;
+};
+
+struct Manufacturer_block {
+    char    Card_UID[4] <format=hex, fgcolor=cDkGreen>;
+    char    LRC[1] <format=hex, fgcolor=cDkRed>;
+    char    Internal[11] <format=hex, fgcolor=cGreen>;
+    char    padding0[32] <hidden=true>;
+    Mifare_ACL ACL;
+};
+
+// Blank 64 bytes card sector
+struct Unused_block {
+    char    Data[48];
+    Mifare_ACL ACL;
+};
+
+// Blank 256 bytes card sector
+struct Unused_block_4K {
+    char    Data[240];
+    Mifare_ACL ACL;
+};
+
+// This is used to authencate you when paying a large amount of money.
+// Default password is the last 6 digit of your student ID.
+struct Authencation_block {
+    char    padding0[40];
+    uint16  password <comment="Pad ahead by 0 to make 6 digit">;
+    char    padding1[6];
+    Mifare_ACL ACL;
+};
+
+
+// TODO: Still unclear how to print these 3-byte numbers
+struct Offline_payment_data {
+    int16   remainder;
+    ubyte   padding0;
+    int16   charge_count;
+    int16   charge_and_payment_count;
+    int16   unknown_counter;
+    int16   Sum_of_N_recent_payments;
+    ubyte   padding1;
+    ubyte   sum_N <comment="N may be 0, 1, 2">;
+    char    unknown_verification_code[3];
+};
+
+// Stores some payments information
+// Unclear purpose
+struct Payment_block {
+    // 2 copies of the same payment verification data
+    Offline_payment_data Payment_data[2];
+    char    padding[16];
+    Mifare_ACL ACL;
+};
+
+// Personal information
+// TODO: What is the 4 byte field following sex?
+struct Information_block {
+    char    Name[16];
+    char    Sex[2];
+    char    Unknown_field[4];
+    char    Padding0[10] <hidden=true>;
+    char    ID[8];
+    char    Padding1[8] <hidden=true>;
+    Mifare_ACL ACL;
+};
+
+// This is written on registering your card at NW playground
+// and read by daily running check-in machines.
+// (Check-in machines are hardcoded to get only an 8-byte string. )
+struct Running_block {
+    char    ID[8];
+    char    Unused[40] <hidden=true>;
+    Mifare_ACL ACL;
+};

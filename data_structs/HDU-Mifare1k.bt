@@ -1,0 +1,27 @@
+//------------------------------------------------
+//--- 010 Editor v7.0.2 Binary Template
+//
+//      File: HDU-Mifare1k.bt
+//   Authors: James Swineson
+//   Website: https://swineson.me
+//   Version: 1.0
+//   Purpose: HDU student ID card (1k version) dump
+//  Category: Electronics
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//   1.0   Initial release.
+//------------------------------------------------
+
+#include "HDU-MifareBlockDef.bt"
+
+struct Card1K {
+    Manufacturer_block  manufacturer_block;
+    Unused_block        unused_block0[5];
+    Authencation_block  authencation_block  <comment="Encrypted">;
+    Payment_block       payment_block       <comment="Encrypted">;
+    Unused_block        private_block[3]    <comment="Encrypted">;
+    Information_block   information_block   <comment="Encrypted">;
+    Unused_block        unused_block1[3];
+    Running_block       running_block;
+} card;
