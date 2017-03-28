@@ -64,6 +64,14 @@ Writing to a Chinese unlockable Mifare-compatible card:
 nfc-mfclassic W a edited_dump.mfd
 ```
 
+### Using MifareClassicTool
+
+[MifareClassicTool](https://github.com/ikarus23/MifareClassicTool) is an Android application used to read and write Mifare cards. You need [a compatible device](https://github.com/ikarus23/MifareClassicTool/issues/20) to use it. 
+
+#### Usage
+
+Put `keys/*.keys` to your devices' `/sdcard/MifareClassicTool/key-files`, then when reading in app, select the corresponding keys file. (If you are not sure which card you are reading, tick both.)
+
 ## Thanks
 
 All glory to the schoolmates who donated their card dumps to me.
