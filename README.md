@@ -20,12 +20,12 @@ There are 2 types of student card. Everyone is given an initial student card whe
 
 #### Payment Client
 
-![Payment Client](http://www.paycircle.cn/file/upload/201310/03/18-10-20-91-147.jpg)
+![Payment Client](http://www.hzsun.com/uploadfiles/images/20160309205944071.jpg)
 
-Payment Clients are typically used to pay use student card. They can also be configured to:
+[Payment Clients](http://www.hzsun.com/proDetail.aspx?PKID=114073) are typically used to pay use student card. They have a numeric keyboard and Ethernet connection. They can also be configured to:
 
 * Undo the last transaction on this client (requires card presence and supervisor password)
-* Charge money
+* Charge money (This may be [another type of device](http://www.hzsun.com/proDetail.aspx?PKID=114071))
 * Write specific data to specific card sector (programmable, will display "CArd" on screen)
 
 And it can be configured to ask for payment password if paying a large amount of money in a single transaction. The authentication model is unclear. 
@@ -38,7 +38,9 @@ Typically an infrared access logger which beeps when people pass, and have a car
 
 #### Library Gate
 
-A read-then-pass access control machine which displays student name on embedded LCD and also connects to an PC displaying log. In 2th floor.
+![Gate machine product picture](http://www.hzsun.com/uploadfiles/2016-03-09/8fa5fa1d-5c75-4a3f-ab66-55df2e97ab91.jpg)
+
+[A read-then-pass access control machine](http://www.hzsun.com/proDetail.aspx?PKID=114107) which displays student name on embedded LCD and also connects to an PC displaying log. In 2th floor.
 
 #### Daily Running Check-in Machine
 
@@ -46,7 +48,7 @@ A metal box with a B/W LCD, camera, PM2.5 sensor and a card reader (maybe PN532)
 
 #### Other Readers in Student Service Center
 
-* Cash Charge Machine (yellow kiosk running Windows XP + Java application): charge with cash, change payment password, and query last 5 transactions.
+* [Cash Charge Machine](http://www.hzsun.com/proDetail.aspx?PKID=114080) (yellow kiosk running Windows XP + Java application): charge with cash, change payment password, and query last 5 transactions.
 * _To be done_
 
 ## Repository Content
