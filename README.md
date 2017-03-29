@@ -1,6 +1,8 @@
 # HDU Student ID Card Project
 
-All the information you need to get access to HDU student ID cards. 
+All the information you need to extract information from HDU student ID cards. May apply to other _[hzsun](http://www.hzsun.com/)_ RFID cards; your mileage may vary.
+
+杭州电子科技大学校园卡存储分析结果。可能也适用于其它[正元智慧](http://www.hzsun.com/)方案的 RFID 卡。
 
 ## License and Legal Stuff
 
@@ -8,11 +10,46 @@ This project is licensed under [WTFPL 2](http://www.wtfpl.net/about/).
 
 THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-## Types of Student Card
+## About Cards and Card Readers
+
+### Types of Student Card
 
 There are 2 types of student card. Everyone is given an initial student card when registering at school; this initial card is a Mifare 4K-compatible card. When you got a re-issued card from student center, the new card will be a Mifare 1K-compatible card. 
 
-## Usage
+### Types of Card Readers
+
+#### Payment Client
+
+![Payment Client](http://www.paycircle.cn/file/upload/201310/03/18-10-20-91-147.jpg)
+
+Payment Clients are typically used to pay use student card. They can also be configured to:
+
+* Undo the last transaction on this client (requires card presence and supervisor password)
+* Charge money
+* Write specific data to specific card sector (programmable, will display "CArd" on screen)
+
+And it can be configured to ask for payment password if paying a large amount of money in a single transaction. The authentication model is unclear. 
+
+Counterfeit Mifare 1K clone cards will be reported as unrecognizable card. Maybe an private card authentication method is implemented somewhere.
+
+#### Dormitory Gate Access Logger
+
+Typically an infrared access logger which beeps when people pass, and have a card reader connecting to a Windows XP computer displaying card reader log. This logger may have racing condition, when you quickly put and take card in certain timing, the beeper won't beep or makes lower sound then usual.
+
+#### Library Gate
+
+A read-then-pass access control machine which displays student name on embedded LCD and also connects to an PC displaying log. In 2th floor.
+
+#### Daily Running Check-in Machine
+
+A metal box with a B/W LCD, camera, PM2.5 sensor and a card reader (maybe PN532). Uses wired power and wireless networking (frequency unclear, but the antennas are visible). The card reader is configured to read the first 8 bytes of sector 15 (no matter which card type) as ASCII (maybe also GBK, although usually there is only 8-digit numeric student ID) string then display it on the LCD. 
+
+#### Other Readers in Student Service Center
+
+* Cash Charge Machine (yellow kiosk running Windows XP + Java application): charge with cash, change payment password, and query last 5 transactions.
+* _To be done_
+
+## Repository Content
 
 ### Keys
 
@@ -52,10 +89,10 @@ nfc-mfclassic r a new_dump.mfd dumps/HDU-Mifare1k-empty.mfd f
 
 #### Writing
 
-Writing to a standard Mifare card: 
+Writing to a standard Mifare card (UID won't be changed): 
 
 ```shell
-nfc-mfclassic w a edited_dump.mfd dumps/HDU-Mifare1k-empty.mfd f
+nfc-mfclassic w a edited_dump.mfd
 ```
 
 Writing to a Chinese unlockable Mifare-compatible card:
@@ -71,6 +108,20 @@ nfc-mfclassic W a edited_dump.mfd
 #### Usage
 
 Put `keys/*.keys` to your devices' `/sdcard/MifareClassicTool/key-files`, then when reading in app, select the corresponding keys file. (If you are not sure which card you are reading, tick both.)
+
+### Using Proxmark3
+
+_This section is to be done._
+
+#### Dumping (Reading)
+
+```shell
+hf mf dump
+```
+
+#### Writing
+
+CAUTION: Proxmark3 have [an issue preventing setting the correct key for encrypted sectors](https://github.com/Proxmark/proxmark3/issues/201).
 
 ## Thanks
 
