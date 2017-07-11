@@ -36,6 +36,8 @@ Counterfeit Mifare 1K clone cards will be reported as unrecognizable card. Maybe
 
 Typically an infrared access logger which beeps when people pass, and have a card reader connecting to a Windows XP computer displaying card reader log. This logger may have racing condition, when you quickly put and take card in certain timing, the beeper won't beep or makes lower sound then usual.
 
+The gate uses reflection infrared method to detect human; you may use some reflection board or infrared light to interfere it. The light source and detector is located on the 2 stands near the wall; the center stand provides 2 reflecation boards to each side.
+
 #### Library Gate
 
 ![Gate machine product picture](http://www.hzsun.com/uploadfiles/2016-03-09/8fa5fa1d-5c75-4a3f-ab66-55df2e97ab91.jpg)
